@@ -33,7 +33,7 @@ class Command(BaseCommand):
             "education_school": "STI College, Philippines",
             "education_year": "Graduated: 2009",
             "years_of_experience": 15,
-            "github": "https://github.com/aragramon",
+            "github": "https://github.com/akosiar2",
             "linkedin": "https://linkedin.com/in/arvin-agramon",
             "avatar_url": "",
         }

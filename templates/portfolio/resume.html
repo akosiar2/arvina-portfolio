@@ -141,11 +141,11 @@
                     </div>
                     <div>
                         <span class="font-semibold">LinkedIn:</span> 
-                        <a href="{{ profile.linkedin }}" target="_blank" class="underline hover:text-indigo-600">linkedin.com/in/arvin-agramon</a>
+                        <a href="{{ profile.linkedin }}" target="_blank" class="underline hover:text-indigo-600">{{ profile.linkedin|cut:"https://" }}</a>
                     </div>
                     <div>
                         <span class="font-semibold">GitHub:</span> 
-                        <a href="{{ profile.github }}" target="_blank" class="underline hover:text-indigo-600">github.com/aragramon</a>
+                        <a href="{{ profile.github }}" target="_blank" class="underline hover:text-indigo-600">{{ profile.github|cut:"https://" }}</a>
                     </div>
                 </div>
             </div>

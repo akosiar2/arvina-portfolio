@@ -34,7 +34,7 @@ class CandidateProfile(models.Model):
     )
     education_year = models.CharField(max_length=50, default="Graduated: 2009")
     years_of_experience = models.PositiveIntegerField(default=15)
-    github = models.URLField(blank=True, default="https://github.com/aragramon")
+    github = models.URLField(blank=True, default="https://github.com/akosiar2")
     linkedin = models.URLField(blank=True, default="https://linkedin.com/in/arvin-agramon")
     resume_file = models.FileField(upload_to="resumes/", blank=True, null=True)
     avatar_url = models.CharField(
