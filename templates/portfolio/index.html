@@ -1,0 +1,892 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Arvin Roman Agramon | Senior Software Engineer & Enterprise Architect{% endblock %}
+
+{% block content %}
+<div x-data="{
+    // Experience timeline filter state
+    expFilter: 'All',
+    earlierExpanded: false,
+
+    // Skills category tab state
+    activeSkillCategory: '{{ skill_categories.0.slug|default:'backend-frameworks' }}',
+
+    // Featured Projects modal state
+    modalOpen: false,
+    selectedProject: null,
+    allProjects: {{ all_projects_json|safe }},
+    
+    openProjectModal(projId) {
+        this.selectedProject = this.allProjects.find(p => p.id === projId) || null;
+        if (this.selectedProject) {
+            this.modalOpen = true;
+            document.body.style.overflow = 'hidden';
+            this.$nextTick(() => { if (window.lucide) window.lucide.createIcons(); });
+        }
+    },
+    closeProjectModal() {
+        this.modalOpen = false;
+        this.selectedProject = null;
+        document.body.style.overflow = '';
+    }
+}" @keydown.escape.window="closeProjectModal()">
+
+    <!-- ========================================================================= -->
+    <!-- 1. HERO SECTION                                                          -->
+    <!-- ========================================================================= -->
+    <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-slate-200 dark:border-slate-800/80">
+        <!-- Ambient Glowing Background Accents -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-indigo-600/15 via-sky-500/10 to-emerald-500/10 blur-[130px] -z-10 pointer-events-none rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Copy & CTAs -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-700 dark:text-slate-300 shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span class="font-semibold text-emerald-600 dark:text-emerald-400">Available</span>
+                        <span class="text-slate-400">|</span>
+                        <span>Senior Software Engineer & Enterprise Architect</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                        Bridging Enterprise <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-sky-500 to-indigo-400 dark:from-indigo-400 dark:via-sky-400 dark:to-emerald-400">
+                            .NET & Cloud Scale
+                        </span>
+                        <br>with Modern AI
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                        Over <strong>15 years of industry experience</strong> architecting mission-critical backend systems (.NET Core, C#, Python), cloud microservices (Azure & AWS), enterprise integrations (SAP, Entra ID, Payments), and cutting-edge Retrieval-Augmented Generation (RAG) AI engines.
+                    </p>
+
+                    <!-- Key Tags / Badges -->
+                    <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                        {% for tag in profile.get_tags_list %}
+                        <span class="px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 font-semibold shadow-xs">
+                            {{ tag }}
+                        </span>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Primary Action CTAs -->
+                    <div class="flex flex-wrap items-center gap-4 pt-4">
+                        <a href="#experience" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 transition-all duration-200 transform hover:-translate-y-0.5">
+                            <i data-lucide="briefcase" class="w-4 h-4"></i>
+                            <span>Explore Experience</span>
+                        </a>
+                        <a href="#projects" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold text-sm border border-slate-300 dark:border-slate-700 transition-all duration-200">
+                            <i data-lucide="layers" class="w-4 h-4"></i>
+                            <span>Architectural Case Studies</span>
+                        </a>
+                        <a href="{% url 'portfolio:resume' %}" class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border border-indigo-300 dark:border-indigo-800/80 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 text-sm font-semibold transition-all">
+                            <i data-lucide="printer" class="w-4 h-4"></i>
+                            <span>ATS Resume View</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Architecture Card / Terminal Preview -->
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl p-6 text-slate-200 font-mono text-xs">
+                        <!-- Card Header Terminal Dots -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            </div>
+                            <span class="text-slate-400 text-[11px]">arvin-agramon-architecture.json</span>
+                        </div>
+
+                        <!-- Code / Architecture Spec -->
+                        <div class="pt-4 space-y-2.5 leading-relaxed overflow-x-auto text-slate-300">
+                            <p class="text-slate-500">// Enterprise Candidate Profile</p>
+                            <p><span class="text-indigo-400">"candidate"</span>: <span class="text-sky-300">"Arvin Roman Agramon"</span>,</p>
+                            <p><span class="text-indigo-400">"experience_years"</span>: <span class="text-emerald-400">15+</span>,</p>
+                            <p><span class="text-indigo-400">"core_backend"</span>: [<span class="text-sky-300">"C#"</span>, <span class="text-sky-300">"ASP.NET Core"</span>, <span class="text-sky-300">"Python/Django"</span>],</p>
+                            <p><span class="text-indigo-400">"cloud_devops"</span>: [<span class="text-sky-300">"Azure Functions"</span>, <span class="text-sky-300">"AWS ECS/ECR"</span>, <span class="text-sky-300">"Docker"</span>],</p>
+                            <p><span class="text-indigo-400">"ai_capabilities"</span>: [<span class="text-emerald-300">"OpenAI API"</span>, <span class="text-emerald-300">"RAG Vector Search"</span>, <span class="text-emerald-300">"pgvector"</span>],</p>
+                            <p><span class="text-indigo-400">"enterprise_integrations"</span>: [<span class="text-sky-300">"SAP RFC/SOAP"</span>, <span class="text-sky-300">"Entra ID / B2C"</span>, <span class="text-sky-300">"Adyen"</span>],</p>
+                            <p><span class="text-indigo-400">"architecture_pattern"</span>: <span class="text-amber-300">"Clean Architecture & Microservices"</span>,</p>
+                            <p><span class="text-indigo-400">"status"</span>: <span class="text-emerald-400">"Ready for Senior & Staff Leadership"</span></p>
+                        </div>
+
+                        <!-- Quick Highlight Card below terminal -->
+                        <div class="mt-6 pt-4 border-t border-slate-800 grid grid-cols-2 gap-3 text-center">
+                            <div class="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50">
+                                <span class="block text-xl font-bold text-indigo-400">15+</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">Years Experience</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50">
+                                <span class="block text-xl font-bold text-emerald-400">10+</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">Systems Delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Quick Metrics / Stats Grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
+                <div class="p-5 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center gap-4">
+                    <div class="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                        <i data-lucide="calendar" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-slate-900 dark:text-white">15+ Years</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">Industry Track Record</div>
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center gap-4">
+                    <div class="p-3 rounded-lg bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400">
+                        <i data-lucide="server" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-slate-900 dark:text-white">10+ Enterprise</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">Systems Modernized</div>
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center gap-4">
+                    <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-slate-900 dark:text-white">AI & RAG</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">Vector Knowledge Bases</div>
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center gap-4">
+                    <div class="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-slate-900 dark:text-white">SAP & Cloud</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">Enterprise Integrations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 2. ABOUT & EXECUTIVE SUMMARY                                             -->
+    <!-- ========================================================================= -->
+    <section id="about" class="py-20 bg-slate-100/60 dark:bg-slate-900/40 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Left Column: Executive Summary & Details -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">
+                        <i data-lucide="user-check" class="w-4 h-4"></i>
+                        <span>Executive Summary</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+                        Senior Engineering Leadership Grounded in Enterprise Delivery
+                    </h2>
+                    
+                    <blockquote class="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border-l-4 border-indigo-600 dark:border-indigo-500 shadow-sm text-slate-700 dark:text-slate-200 italic leading-relaxed text-base sm:text-lg">
+                        "{{ profile.summary }}"
+                    </blockquote>
+
+                    <!-- Academic & Location Info -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 flex items-start gap-3">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-indigo-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <span class="block text-xs font-mono uppercase text-slate-400">Education</span>
+                                <span class="font-semibold text-slate-900 dark:text-white text-sm">{{ profile.education_degree }}</span>
+                                <span class="block text-xs text-slate-500 dark:text-slate-400">{{ profile.education_school }} ({{ profile.education_year }})</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <span class="block text-xs font-mono uppercase text-slate-400">Location & Availability</span>
+                                <span class="font-semibold text-slate-900 dark:text-white text-sm">{{ profile.location }}</span>
+                                <span class="block text-xs text-slate-500 dark:text-slate-400">Open to Global Remote & Hybrid Roles</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Engineering Principles Cards -->
+                <div class="lg:col-span-5 space-y-4">
+                    <h3 class="text-sm font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                        Architectural Foundations
+                    </h3>
+
+                    <div class="p-5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2 hover:border-indigo-400 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                                <i data-lucide="box" class="w-4 h-4"></i>
+                            </span>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Clean Architecture & SOLID</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Decoupled domain models, repository/unit-of-work patterns, testable service layers, and predictable dependency injection.
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2 hover:border-indigo-400 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+                                <i data-lucide="database" class="w-4 h-4"></i>
+                            </span>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-sm">High-Throughput Data & Micro-ORMs</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Fine-tuned execution plans with Dapper, EF Core view projections, and Sybase ASE/SQL Server stored procedures handling millions of rows.
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2 hover:border-indigo-400 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="p-2 rounded-lg bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400">
+                                <i data-lucide="network" class="w-4 h-4"></i>
+                            </span>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Enterprise Integrations & Identity</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Resilient SOAP/RFC connectors for SAP ERP, Azure B2C/Entra ID SSO authentication, and idempotent payment gateways (Adyen).
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2 hover:border-indigo-400 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="p-2 rounded-lg bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400">
+                                <i data-lucide="shield" class="w-4 h-4"></i>
+                            </span>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Security & Reliability by Design</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Strict enforcement of OWASP Top 10 security standards, RBAC, input sanitization, and comprehensive NUnit test suites.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 3. CORE COMPETENCIES & TECH MATRIX                                       -->
+    <!-- ========================================================================= -->
+    <section id="skills" class="py-20 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">
+                    <i data-lucide="cpu" class="w-4 h-4"></i>
+                    <span>Technical Capabilities</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+                    Core Competencies Matrix
+                </h2>
+                <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3">
+                    A comprehensive taxonomy of mastered technologies, frameworks, cloud platforms, and architecture practices.
+                </p>
+            </div>
+
+            <!-- Category Tab Navigation -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+                {% for cat in skill_categories %}
+                <button type="button" 
+                        @click="activeSkillCategory = '{{ cat.slug }}'; $nextTick(() => { if (window.lucide) window.lucide.createIcons(); })"
+                        :class="activeSkillCategory === '{{ cat.slug }}' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' : 'bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'"
+                        class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2">
+                    <i data-lucide="{{ cat.icon_name }}" class="w-4 h-4"></i>
+                    <span>{{ cat.name }}</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full font-mono bg-black/20 text-current">
+                        {{ cat.skills.count }}
+                    </span>
+                </button>
+                {% endfor %}
+            </div>
+
+            <!-- Category Content Panels -->
+            {% for cat in skill_categories %}
+            <div x-show="activeSkillCategory === '{{ cat.slug }}'"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-3"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                
+                {% for skill in cat.skills.all %}
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/70 shadow-xs hover:border-indigo-400 dark:hover:border-indigo-500/80 transition-all duration-200 group">
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-2.5 h-2.5 rounded-full {% if skill.is_primary %}bg-indigo-500{% else %}bg-slate-400{% endif %}"></div>
+                            <span class="font-bold text-slate-900 dark:text-white text-sm group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                {{ skill.name }}
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            {% if skill.is_featured %}
+                            <span class="p-1 rounded-md bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400" title="Core Specialization">
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            </span>
+                            {% endif %}
+                            <span class="text-[11px] font-mono font-semibold px-2 py-0.5 rounded-md {% if skill.is_primary %}bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-300{% else %}bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400{% endif %}">
+                                {% if skill.is_primary %}Core{% else %}Proficient{% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar & Percentage -->
+                    <div class="space-y-1.5">
+                        <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+                            <span>Proficiency</span>
+                            <span class="font-semibold text-slate-700 dark:text-slate-300">{{ skill.proficiency_percentage }}%</span>
+                        </div>
+                        <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                            <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-sky-400" style="width: {{ skill.proficiency_percentage }}%;"></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 4. PROFESSIONAL EXPERIENCE TIMELINE (INTERACTIVE)                         -->
+    <!-- ========================================================================= -->
+    <section id="experience" class="py-20 bg-slate-100/60 dark:bg-slate-900/40 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">
+                    <i data-lucide="history" class="w-4 h-4"></i>
+                    <span>Career Track Record</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+                    Professional Experience Timeline
+                </h2>
+                <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3">
+                    Proven enterprise trajectory delivering scalable software solutions across Australia, the United States, and the Philippines.
+                </p>
+
+                <!-- Category Timeline Filter Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mt-8">
+                    {% for tag in filter_tags %}
+                    <button type="button" 
+                            @click="expFilter = '{{ tag }}'"
+                            :class="expFilter === '{{ tag }}' ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'"
+                            class="px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-200">
+                        {{ tag }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Primary Experience Cards -->
+            <div class="space-y-6 max-w-5xl mx-auto">
+                {% for exp in recent_experiences %}
+                <div x-show="expFilter === 'All' || expFilter === '{{ exp.category_tag }}'"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-2"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-xs hover:border-indigo-400 dark:hover:border-indigo-500/80 transition-all duration-200">
+                    
+                    <!-- Card Header -->
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-700/60">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2 mb-1">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ exp.role }}</h3>
+                                {% if exp.is_current %}
+                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
+                                    Current Role
+                                </span>
+                                {% endif %}
+                                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/50">
+                                    {{ exp.category_tag }}
+                                </span>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
+                                <span class="text-indigo-600 dark:text-indigo-400 font-semibold">{{ exp.company }}</span>
+                                {% if exp.location %}
+                                <span>•</span>
+                                <span class="flex items-center gap-1 text-xs">
+                                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                                    {{ exp.location }}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Date Badge -->
+                        <div class="flex-shrink-0">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700/60 text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
+                                {{ exp.start_date }} — {{ exp.end_date }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Company Context -->
+                    {% if exp.context %}
+                    <div class="pt-4 text-xs font-mono text-slate-500 dark:text-slate-400 italic">
+                        Context: {{ exp.context }}
+                    </div>
+                    {% endif %}
+
+                    <!-- Key Deliverables List -->
+                    {% if exp.get_bullet_points_list %}
+                    <ul class="mt-4 space-y-2.5 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        {% for bullet in exp.get_bullet_points_list %}
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 flex-shrink-0"></span>
+                            <span>{{ bullet }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <!-- Tech Stack Chips -->
+                    {% if exp.get_tech_stack_list %}
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex flex-wrap items-center gap-1.5">
+                        <span class="text-xs font-mono text-slate-400 mr-2 flex items-center gap-1">
+                            <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+                            Stack:
+                        </span>
+                        {% for tech in exp.get_tech_stack_list %}
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600/50">
+                            {{ tech }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Earlier Career Experience (2009–2020) Expandable Accordion -->
+            {% if earlier_experiences %}
+            <div class="max-w-5xl mx-auto mt-10">
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 shadow-xs">
+                    <button type="button" 
+                            @click="earlierExpanded = !earlierExpanded; $nextTick(() => { if (window.lucide) window.lucide.createIcons(); })"
+                            class="w-full flex items-center justify-between gap-4 text-left focus:outline-none">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                                <i data-lucide="archive" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Earlier Career Foundations (2009 – 2020)</h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">
+                                    5 earlier full-stack & web developer engagements spanning fintech, HR tech SaaS, and enterprise software.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400">
+                            <span x-text="earlierExpanded ? 'Collapse' : 'Expand History'">Expand History</span>
+                            <i :data-lucide="earlierExpanded ? 'chevron-up' : 'chevron-down'" class="w-4 h-4"></i>
+                        </div>
+                    </button>
+
+                    <div x-show="earlierExpanded"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 -translate-y-2"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700/80 space-y-6">
+                        
+                        {% for exp in earlier_experiences %}
+                        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                <div>
+                                    <h5 class="font-bold text-slate-900 dark:text-white text-sm">{{ exp.role }} <span class="text-indigo-600 dark:text-indigo-400">@ {{ exp.company }}</span></h5>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400 italic">{{ exp.context }}</span>
+                                </div>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">{{ exp.start_date }} — {{ exp.end_date }}</span>
+                            </div>
+
+                            {% if exp.get_bullet_points_list %}
+                            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2">
+                                {% for bullet in exp.get_bullet_points_list %}
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5"></span>
+                                    <span>{{ bullet }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+
+                            {% if exp.get_tech_stack_list %}
+                            <div class="pt-2 flex flex-wrap gap-1 font-mono text-[10px] text-slate-500 dark:text-slate-400">
+                                {% for tech in exp.get_tech_stack_list %}
+                                <span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 5. FEATURED PROJECTS / ARCHITECTURAL CASE STUDIES                        -->
+    <!-- ========================================================================= -->
+    <section id="projects" class="py-20 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-3">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    <span>Case Studies</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+                    Featured Architectural Accomplishments
+                </h2>
+                <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3">
+                    Deep-dive case studies showcasing end-to-end architecture, technical challenges overcome, and business impact.
+                </p>
+            </div>
+
+            <!-- Case Study Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for proj in featured_projects %}
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 shadow-xs flex flex-col justify-between hover:border-indigo-500 transition-all duration-300 group">
+                    <div>
+                        <!-- Header Badges -->
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/50">
+                                {{ proj.category }}
+                            </span>
+                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400">
+                                {{ proj.company_name }}
+                            </span>
+                        </div>
+
+                        <!-- Title & Subtitle -->
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                            {{ proj.title }}
+                        </h3>
+                        {% if proj.subtitle %}
+                        <p class="text-xs text-indigo-600 dark:text-indigo-400 font-medium mt-1 mb-3">
+                            {{ proj.subtitle }}
+                        </p>
+                        {% endif %}
+
+                        <!-- Impact Metrics Pill -->
+                        {% if proj.metrics %}
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-mono font-semibold my-2">
+                            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+                            <span>{{ proj.metrics }}</span>
+                        </div>
+                        {% endif %}
+
+                        <!-- Problem Summary -->
+                        <div class="space-y-2 mt-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            <p><strong>Challenge:</strong> {{ proj.problem_statement|truncatewords:24 }}</p>
+                            <p><strong>Solution:</strong> {{ proj.solution_summary|truncatewords:24 }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Footer & Deep Dive CTA -->
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 space-y-4">
+                        <!-- Stack Badges -->
+                        <div class="flex flex-wrap gap-1">
+                            {% for tech in proj.get_tech_stack_list|slice:":4" %}
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400">
+                                {{ tech }}
+                            </span>
+                            {% endfor %}
+                            {% if proj.get_tech_stack_list|length > 4 %}
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700/50 text-slate-500">
+                                +{{ proj.get_tech_stack_list|length|add:"-4" }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Modal Trigger Button -->
+                        <button type="button" 
+                                @click="openProjectModal({{ proj.id }})"
+                                class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-indigo-600 dark:bg-slate-700/60 dark:hover:bg-indigo-600 text-slate-800 dark:text-slate-200 hover:text-white dark:hover:text-white font-semibold text-xs transition-all duration-200">
+                            <span>Architecture Deep Dive</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL / DRAWER FOR ARCHITECTURAL CASE STUDY                               -->
+    <!-- ========================================================================= -->
+    <div x-show="modalOpen" 
+         x-cloak
+         class="fixed inset-0 z-50 overflow-y-auto"
+         role="dialog" 
+         aria-modal="true">
+        
+        <!-- Backdrop Blur -->
+        <div x-show="modalOpen" 
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity"
+             @click="closeProjectModal()"></div>
+
+        <!-- Modal Dialog Box -->
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-6">
+            <div x-show="modalOpen" 
+                 x-transition:enter="ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave="ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl p-6 sm:p-8"
+                 @click.outside="closeProjectModal()">
+
+                <template x-if="selectedProject">
+                    <div>
+                        <!-- Header -->
+                        <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1.5">
+                                    <span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400" x-text="selectedProject.category"></span>
+                                    <span class="text-xs font-mono text-slate-400" x-text="selectedProject.company_name"></span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-slate-900 dark:text-white" x-text="selectedProject.title"></h3>
+                                <p class="text-xs text-indigo-600 dark:text-indigo-400 font-medium mt-1" x-text="selectedProject.subtitle"></p>
+                            </div>
+                            <button @click="closeProjectModal()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                                <i data-lucide="x" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+
+                        <!-- Metrics pill if present -->
+                        <template x-if="selectedProject.metrics">
+                            <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-mono font-semibold">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                <span x-text="selectedProject.metrics"></span>
+                            </div>
+                        </template>
+
+                        <!-- Body Content Sections -->
+                        <div class="mt-6 space-y-6 text-sm text-slate-700 dark:text-slate-300">
+                            <!-- Challenge -->
+                            <div>
+                                <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5">Problem Statement & Bottlenecks</h4>
+                                <p class="leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800" x-text="selectedProject.problem_statement"></p>
+                            </div>
+
+                            <!-- Solution -->
+                            <div>
+                                <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5">Architectural Solution</h4>
+                                <p class="leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800" x-text="selectedProject.solution_summary"></p>
+                            </div>
+
+                            <!-- Highlights -->
+                            <template x-if="selectedProject.architecture_highlights">
+                                <div>
+                                    <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-1.5">Architecture & Design Highlights</h4>
+                                    <pre class="font-sans text-xs sm:text-sm whitespace-pre-line leading-relaxed bg-slate-900 text-indigo-300 p-4 rounded-xl border border-slate-800" x-text="selectedProject.architecture_highlights"></pre>
+                                </div>
+                            </template>
+
+                            <!-- Key Features -->
+                            <template x-if="selectedProject.key_features && selectedProject.key_features.length > 0">
+                                <div>
+                                    <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Key Deliverables</h4>
+                                    <ul class="space-y-2">
+                                        <template x-for="feat in selectedProject.key_features" :key="feat">
+                                            <li class="flex items-start gap-2.5 text-xs sm:text-sm">
+                                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                                                <span x-text="feat"></span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+
+                            <!-- Stack Tags -->
+                            <div>
+                                <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">Technology Stack</h4>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="tech in selectedProject.tech_stack" :key="tech">
+                                        <span class="px-3 py-1 rounded-md text-xs font-mono bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60" x-text="tech"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+                            <button @click="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-semibold text-xs transition-colors">
+                                Close Case Study
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 6. CONTACT SECTION & INTERACTIVE FORM                                     -->
+    <!-- ========================================================================= -->
+    <section id="contact" class="py-20 bg-slate-100/60 dark:bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Left Column: Contact Channels & Bio -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span>Direct Channel</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+                        Let's Discuss Your Enterprise Architecture
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Whether you are migrating legacy systems, integrating SAP or payment APIs, architecting AI/RAG solutions, or seeking senior .NET leadership, I'm available for technical discussions and exploratory interviews.
+                    </p>
+
+                    <!-- Contact Details Cards -->
+                    <div class="space-y-3 pt-2">
+                        <a href="mailto:{{ profile.email }}" class="p-4 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 flex items-center gap-4 hover:border-indigo-500 transition-colors group">
+                            <div class="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-mono text-slate-400">Direct Email</span>
+                                <span class="font-semibold text-slate-900 dark:text-white text-sm">{{ profile.email }}</span>
+                            </div>
+                        </a>
+
+                        <a href="tel:{{ profile.phone }}" class="p-4 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 flex items-center gap-4 hover:border-indigo-500 transition-colors group">
+                            <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-mono text-slate-400">Direct Phone / Mobile</span>
+                                <span class="font-semibold text-slate-900 dark:text-white text-sm">{{ profile.phone }}</span>
+                            </div>
+                        </a>
+
+                        <div class="p-4 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 flex items-center gap-4">
+                            <div class="p-3 rounded-lg bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-mono text-slate-400">Location</span>
+                                <span class="font-semibold text-slate-900 dark:text-white text-sm">{{ profile.location }} (Available Worldwide)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social / External Link Badges -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                            <span>LinkedIn Profile</span>
+                        </a>
+                        <a href="{{ profile.github }}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                            <span>GitHub Repos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Working Contact Form -->
+                <div class="lg:col-span-7">
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Send an Inquiry</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 font-mono">
+                            Submissions are securely validated and delivered to Arvin's direct inbox.
+                        </p>
+
+                        <form method="post" action="{% url 'portfolio:home' %}#contact" class="space-y-4">
+                            {% csrf_token %}
+
+                            <!-- Invisible Bot Honeypot Field -->
+                            {{ contact_form.verification_code }}
+
+                            <!-- Form Errors if any -->
+                            {% if contact_form.errors %}
+                            <div class="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 text-xs text-rose-700 dark:text-rose-300">
+                                Please correct the highlighted errors below.
+                            </div>
+                            {% endif %}
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="{{ contact_form.name.id_for_label }}" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                                        Your Name *
+                                    </label>
+                                    {{ contact_form.name }}
+                                    {% if contact_form.name.errors %}
+                                    <p class="text-xs text-rose-500 mt-1">{{ contact_form.name.errors.0 }}</p>
+                                    {% endif %}
+                                </div>
+
+                                <div>
+                                    <label for="{{ contact_form.email.id_for_label }}" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                                        Work Email *
+                                    </label>
+                                    {{ contact_form.email }}
+                                    {% if contact_form.email.errors %}
+                                    <p class="text-xs text-rose-500 mt-1">{{ contact_form.email.errors.0 }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="{{ contact_form.subject.id_for_label }}" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                                    Subject / Topic *
+                                </label>
+                                {{ contact_form.subject }}
+                                {% if contact_form.subject.errors %}
+                                <p class="text-xs text-rose-500 mt-1">{{ contact_form.subject.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+
+                            <div>
+                                <label for="{{ contact_form.message.id_for_label }}" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                                    Message & Project Details *
+                                </label>
+                                {{ contact_form.message }}
+                                {% if contact_form.message.errors %}
+                                <p class="text-xs text-rose-500 mt-1">{{ contact_form.message.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+
+                            <button type="submit" class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-600/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>Transmit Message</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

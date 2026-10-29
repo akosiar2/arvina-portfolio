@@ -1,0 +1,283 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Arvin Roman Agramon | Senior Software Engineer & Enterprise Architect{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Senior .NET, Full-Stack, and Cloud Integration Specialist with over 15 years of industry experience building high-throughput APIs, AI/RAG solutions, and enterprise integrations.{% endblock %}">
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN with Custom Enterprise Config) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        },
+                        navy: {
+                            800: '#0f172a',
+                            900: '#090d16',
+                            950: '#030712',
+                        },
+                        tech: {
+                            net: '#512bd4',
+                            azure: '#0089d6',
+                            aws: '#ff9900',
+                            ai: '#10b981',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Alpine.js for lightweight reactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.13.5/dist/cdn.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- Anti-FOUC Theme Script -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-navy-950 text-slate-800 dark:text-slate-200 font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-300 min-h-screen flex flex-col"
+      x-data="{
+          mobileMenuOpen: false,
+          isDark: document.documentElement.classList.contains('dark'),
+          toggleTheme() {
+              this.isDark = !this.isDark;
+              if (this.isDark) {
+                  document.documentElement.classList.add('dark');
+                  localStorage.setItem('theme', 'dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+                  localStorage.setItem('theme', 'light');
+              }
+              this.$nextTick(() => { if (window.lucide) window.lucide.createIcons(); });
+          }
+      }">
+
+    <!-- Top Status / Notification Bar -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-indigo-900/40 text-center font-mono">
+        <span class="inline-flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-semibold text-slate-100">Enterprise Ready:</span> Senior .NET Core, Cloud Microservices & AI/RAG Architecture Specialist
+            <span class="hidden md:inline text-slate-400">| 15+ Years Industry Experience</span>
+        </span>
+    </div>
+
+    <!-- Main Header & Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-white/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo / Monogram -->
+            <a href="{% url 'portfolio:home' %}" class="flex items-center gap-3.5 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-sky-400 p-[2px] shadow-md shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-all duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                        <span class="font-mono font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-sky-300 tracking-tighter text-base">ARA</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="block font-bold text-slate-900 dark:text-white tracking-tight leading-none text-base group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        Arvin Roman Agramon
+                    </span>
+                    <span class="block text-xs font-mono text-slate-500 dark:text-slate-400 mt-1">
+                        Senior Software Engineer
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                <a href="/#about" class="px-3.5 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-lg transition-colors">About</a>
+                <a href="/#skills" class="px-3.5 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-lg transition-colors">Competencies</a>
+                <a href="/#experience" class="px-3.5 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-lg transition-colors">Experience</a>
+                <a href="/#projects" class="px-3.5 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-lg transition-colors">Case Studies</a>
+                <a href="/#contact" class="px-3.5 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-lg transition-colors">Contact</a>
+            </nav>
+
+            <!-- Action Controls (Theme, Resume, Mobile Toggle) -->
+            <div class="flex items-center gap-3">
+                <!-- Dark / Light Mode Toggle Button -->
+                <button @click="toggleTheme()" 
+                        type="button" 
+                        class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-400 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        title="Toggle Dark / Light Mode"
+                        aria-label="Toggle Dark / Light Mode">
+                    <template x-if="isDark">
+                        <i data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
+                    </template>
+                    <template x-if="!isDark">
+                        <i data-lucide="moon" class="w-4 h-4 text-indigo-600"></i>
+                    </template>
+                </button>
+
+                <!-- CV Printable / ATS View Button -->
+                <a href="{% url 'portfolio:resume' %}" 
+                   class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-600/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span>Print / View CV</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                        type="button" 
+                        class="md:hidden p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        aria-label="Toggle mobile menu">
+                    <i :data-lucide="mobileMenuOpen ? 'x' : 'menu'" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             class="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-5 space-y-2"
+             @click.outside="mobileMenuOpen = false">
+            <a href="/#about" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">About</a>
+            <a href="/#skills" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">Competencies</a>
+            <a href="/#experience" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">Experience</a>
+            <a href="/#projects" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">Case Studies</a>
+            <a href="/#contact" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">Contact</a>
+            <a href="{% url 'portfolio:resume' %}" @click="mobileMenuOpen = false" class="flex items-center justify-center gap-2 w-full mt-3 px-4 py-2.5 text-center font-semibold rounded-lg bg-indigo-600 text-white">
+                <i data-lucide="file-text" class="w-4 h-4"></i>
+                <span>Print / ATS Curriculum Vitae</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Global Toast / Flash Messages -->
+    {% if messages %}
+    <div class="fixed top-24 right-4 z-50 flex flex-col gap-3 max-w-md w-full px-4 pointer-events-none">
+        {% for message in messages %}
+        <div class="flash-toast pointer-events-auto p-4 rounded-xl shadow-xl flex items-start gap-3 border transition-all duration-300 {% if message.tags == 'success' %}bg-emerald-950/90 border-emerald-500/50 text-emerald-200{% else %}bg-rose-950/90 border-rose-500/50 text-rose-200{% endif %} backdrop-blur-md">
+            <div class="p-1 rounded-lg {% if message.tags == 'success' %}bg-emerald-900/50 text-emerald-400{% else %}bg-rose-900/50 text-rose-400{% endif %}">
+                <i data-lucide="{% if message.tags == 'success' %}check-circle-2{% else %}alert-circle{% endif %}" class="w-5 h-5"></i>
+            </div>
+            <div class="flex-1 text-sm font-medium leading-relaxed">
+                {{ message }}
+            </div>
+            <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content Container -->
+    <main class="flex-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Executive Footer -->
+    <footer class="bg-white dark:bg-navy-950 border-t border-slate-200 dark:border-slate-800/80 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Col 1: Bio & Monogram -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center font-mono font-bold text-white shadow-md">
+                            ARA
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 dark:text-white text-base">Arvin Roman Agramon</span>
+                            <span class="block text-xs font-mono text-indigo-500">Senior Software Engineer</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
+                        Architecting high-throughput .NET Core APIs, AI/RAG vector search solutions, and robust multi-cloud services for enterprise clients across Australasia, North America, and globally.
+                    </p>
+                    <div class="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+                        <a href="mailto:aragramon@gmail.com" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title="Send Email">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/arvin-agramon" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title="LinkedIn Profile">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://github.com/aragramon" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title="GitHub Profile">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/#about" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Executive Bio</a></li>
+                        <li><a href="/#skills" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Core Competencies</a></li>
+                        <li><a href="/#experience" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Professional Timeline</a></li>
+                        <li><a href="/#projects" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Architectural Projects</a></li>
+                        <li><a href="{% url 'portfolio:resume' %}" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Print-Ready CV</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Technical Credentials -->
+                <div>
+                    <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Focus Areas</h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-slate-700 dark:text-slate-300">#NetCore</span>
+                        <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-slate-700 dark:text-slate-300">#Fullstack</span>
+                        <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-slate-700 dark:text-slate-300">#AgileDelivery</span>
+                        <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-slate-700 dark:text-slate-300">#EnterpriseArchitecture</span>
+                        <span class="px-2.5 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-slate-700 dark:text-slate-300">#AIRAG</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Architecture Notice -->
+            <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-500 font-mono">
+                <div>
+                    &copy; 2026 Arvin Roman Agramon. All rights reserved.
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>Engineered with Django 5.x & Tailwind CSS</span>
+                    <span>•</span>
+                    <a href="/admin/" class="hover:underline hover:text-indigo-500">Admin Portal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript Assets -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        // Ensure Lucide renders on initial page load
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

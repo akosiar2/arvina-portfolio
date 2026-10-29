@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae — Arvin Roman Agramon | Senior Software Engineer</title>
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Print and Layout Styles -->
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 15mm 15mm 15mm 15mm;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .resume-sheet {
+            max-width: 8.5in;
+            min-height: 11in;
+            margin: 2rem auto;
+            background: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+        }
+
+        @media print {
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .resume-sheet {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .avoid-break {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            a {
+                color: #0f172a !important;
+                text-decoration: none !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Sticky Action Toolbar for Web Visitors (Hidden in Print) -->
+    <header class="no-print sticky top-0 z-50 bg-slate-900 text-white border-b border-slate-800 shadow-md">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="{% url 'portfolio:home' %}" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Back to Portfolio</span>
+                </a>
+                <span class="text-xs text-slate-400 hidden sm:inline">| ATS-Formatted Curriculum Vitae</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition-colors cursor-pointer">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                    <span>Print / Save as PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Resume Document Container -->
+    <main class="resume-sheet text-slate-900 leading-normal">
+        
+        <!-- ========================================== -->
+        <!-- HEADER / CONTACT INFORMATION               -->
+        <!-- ========================================== -->
+        <header class="border-b-2 border-slate-900 pb-5 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-slate-950 uppercase">
+                        {{ profile.name }}
+                    </h1>
+                    <p class="text-base font-bold text-indigo-700 mt-1">
+                        {{ profile.title }}
+                    </p>
+                    <p class="text-xs font-mono text-slate-600 mt-1">
+                        {{ profile.key_tags }}
+                    </p>
+                </div>
+
+                <div class="text-xs text-slate-700 space-y-1 font-mono sm:text-right flex-shrink-0">
+                    <div>
+                        <span class="font-semibold">Email:</span> 
+                        <a href="mailto:{{ profile.email }}" class="underline hover:text-indigo-600">{{ profile.email }}</a>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Phone:</span> 
+                        <span>{{ profile.phone }}</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Location:</span> 
+                        <span>{{ profile.location }}</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">LinkedIn:</span> 
+                        <a href="{{ profile.linkedin }}" target="_blank" class="underline hover:text-indigo-600">linkedin.com/in/arvin-agramon</a>
+                    </div>
+                    <div>
+                        <span class="font-semibold">GitHub:</span> 
+                        <a href="{{ profile.github }}" target="_blank" class="underline hover:text-indigo-600">github.com/aragramon</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================== -->
+        <!-- EXECUTIVE SUMMARY                          -->
+        <!-- ========================================== -->
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">
+                Executive Summary
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed text-justify">
+                {{ profile.summary }}
+            </p>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- CORE COMPETENCIES MATRIX                   -->
+        <!-- ========================================== -->
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-3">
+                Core Competencies Matrix
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-xs">
+                {% for cat in skill_categories %}
+                <div class="avoid-break">
+                    <span class="font-bold text-slate-950 font-mono">{{ cat.name }}:</span>
+                    <span class="text-slate-800">
+                        {% for skill in cat.skills.all %}
+                            {{ skill.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PROFESSIONAL EXPERIENCE                    -->
+        <!-- ========================================== -->
+        <section class="mb-6">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-4">
+                Professional Experience Records
+            </h2>
+
+            <div class="space-y-5">
+                {% for exp in recent_experiences %}
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">{{ exp.role }}</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">{{ exp.company }}</strong></span>
+                            {% if exp.location %}
+                            <span class="text-slate-500 text-xs font-mono"> ({{ exp.location }})</span>
+                            {% endif %}
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            {{ exp.start_date }} — {{ exp.end_date }}
+                        </div>
+                    </div>
+
+                    {% if exp.context %}
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: {{ exp.context }}
+                    </p>
+                    {% endif %}
+
+                    {% if exp.get_bullet_points_list %}
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        {% for bullet in exp.get_bullet_points_list %}
+                        <li>{{ bullet }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if exp.tech_stack %}
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> {{ exp.tech_stack }}
+                    </p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- EARLIER EXPERIENCE HISTORY                 -->
+        <!-- ========================================== -->
+        {% if earlier_experiences %}
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-3">
+                Earlier Career History (2009 — 2020)
+            </h2>
+            <div class="space-y-2.5 text-xs text-slate-800">
+                {% for exp in earlier_experiences %}
+                <div>
+                    <span class="font-bold text-slate-950">{{ exp.role }}</span> — <span class="text-indigo-800 font-semibold">{{ exp.company }}</span>
+                    <span class="text-slate-500 font-mono">({{ exp.start_date }} — {{ exp.end_date }})</span>:
+                    <span class="text-slate-700">
+                        {{ exp.context }} {% if exp.tech_stack %}[Stack: {{ exp.tech_stack }}]{% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- ========================================== -->
+        <!-- FEATURED ARCHITECTURAL CASE STUDIES        -->
+        <!-- ========================================== -->
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-3">
+                Key Architectural Deliverables & Case Studies
+            </h2>
+            <div class="space-y-3 text-xs">
+                {% for proj in featured_projects %}
+                <div class="avoid-break bg-slate-50 p-2.5 rounded border border-slate-200">
+                    <div class="flex items-center justify-between font-bold text-slate-950">
+                        <span>{{ proj.title }} ({{ proj.company_name }})</span>
+                        <span class="font-mono text-indigo-700 font-normal text-[11px]">{{ proj.category }}</span>
+                    </div>
+                    <p class="text-slate-700 mt-1">{{ proj.solution_summary }}</p>
+                    <p class="font-mono text-[10px] text-slate-600 mt-1">
+                        <span class="font-semibold text-slate-800">Stack & Impact:</span> {{ proj.tech_stack }} | {{ proj.metrics }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- EDUCATION                                  -->
+        <!-- ========================================== -->
+        <section class="avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">
+                Education & Credentials
+            </h2>
+            <div class="flex items-center justify-between text-xs">
+                <div>
+                    <span class="font-bold text-slate-950 text-sm">{{ profile.education_degree }}</span>
+                    <div class="text-slate-700">{{ profile.education_school }}</div>
+                </div>
+                <div class="font-mono font-semibold text-slate-700 text-xs">
+                    {{ profile.education_year }}
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
