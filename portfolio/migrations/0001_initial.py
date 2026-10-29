@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('company', models.CharField(max_length=200)),
                 ('role', models.CharField(max_length=200)),
-                ('location', models.CharField(blank=True, default='Remote / Hybrid', max_length=100)),
+                ('location', models.CharField(blank=True, default='Remote', max_length=100)),
                 ('start_date', models.CharField(help_text='e.g. Sep 2025', max_length=50)),
                 ('end_date', models.CharField(blank=True, default='Present', help_text='e.g. Sep 2026 or Present', max_length=50)),
                 ('is_current', models.BooleanField(default=False)),

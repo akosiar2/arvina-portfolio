@@ -166,7 +166,7 @@ class Command(BaseCommand):
             {
                 "company": "Visy Industries",
                 "role": "Senior Application Developer",
-                "location": "Melbourne, Australia (Remote / Hybrid)",
+                "location": "Melbourne, Australia (Remote)",
                 "start_date": "Sep 2025",
                 "end_date": "Sep 2026",
                 "is_current": True,
@@ -207,7 +207,7 @@ class Command(BaseCommand):
                 "company_url": "https://missionlens.org",
             },
             {
-                "company": "Equity Transport Group (OnBoard Outsourcing)",
+                "company": "OnBoard Outsourcing (Equity Transport Group)",
                 "role": "Full Stack .NET Developer",
                 "location": "Melbourne, Australia / Philippines (Remote)",
                 "start_date": "Jun 2024",
