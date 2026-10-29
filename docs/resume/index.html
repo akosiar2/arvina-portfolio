@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae — Arvin Roman Agramon | Senior Software Engineer</title>
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Print and Layout Styles -->
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 15mm 15mm 15mm 15mm;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .resume-sheet {
+            max-width: 8.5in;
+            min-height: 11in;
+            margin: 2rem auto;
+            background: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+        }
+
+        @media print {
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .resume-sheet {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .avoid-break {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            a {
+                color: #0f172a !important;
+                text-decoration: none !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Sticky Action Toolbar for Web Visitors (Hidden in Print) -->
+    <header class="no-print sticky top-0 z-50 bg-slate-900 text-white border-b border-slate-800 shadow-md">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="../" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Back to Portfolio</span>
+                </a>
+                <span class="text-xs text-slate-400 hidden sm:inline">| ATS-Formatted Curriculum Vitae</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition-colors cursor-pointer">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                    <span>Print / Save as PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Resume Document Container -->
+    <main class="resume-sheet text-slate-900 leading-normal">
+        
+        <!-- ========================================== -->
+        <!-- HEADER / CONTACT INFORMATION               -->
+        <!-- ========================================== -->
+        <header class="border-b-2 border-slate-900 pb-5 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-slate-950 uppercase">
+                        Arvin Roman Agramon
+                    </h1>
+                    <p class="text-base font-bold text-indigo-700 mt-1">
+                        Senior Software Engineer | Full-Stack &amp; Cloud Integration Specialist
+                    </p>
+                    <p class="text-xs font-mono text-slate-600 mt-1">
+                        #NetCore, #Fullstack, #AgileDelivery, #EnterpriseArchitecture, #AIRAG
+                    </p>
+                </div>
+
+                <div class="text-xs text-slate-700 space-y-1 font-mono sm:text-right flex-shrink-0">
+                    <div>
+                        <span class="font-semibold">Email:</span> 
+                        <a href="mailto:aragramon@gmail.com" class="underline hover:text-indigo-600">aragramon@gmail.com</a>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Phone:</span> 
+                        <span>+639278414288</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Location:</span> 
+                        <span>Philippines</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">LinkedIn:</span> 
+                        <a href="https://linkedin.com/in/arvin-agramon" target="_blank" class="underline hover:text-indigo-600">linkedin.com/in/arvin-agramon</a>
+                    </div>
+                    <div>
+                        <span class="font-semibold">GitHub:</span> 
+                        <a href="https://github.com/akosiar2" target="_blank" class="underline hover:text-indigo-600">github.com/akosiar2</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================== -->
+        <!-- EXECUTIVE SUMMARY                          -->
+        <!-- ========================================== -->
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">
+                Executive Summary
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed text-justify">
+                Senior .NET &amp; Full-Stack Software Engineer with extensive experience developing enterprise APIs, database-driven applications, and system integrations. Skilled in C#, ASP.NET Core, Entity Framework Core, Dapper, SQL Server, MySQL, Sybase ASE, with strong experience integrating SAP services and Microsoft Entra ID / Azure B2C. Experienced in modernizing legacy applications and reporting platforms, implementing AI/RAG solutions, troubleshooting complex production issues, and delivering secure, scalable backend services across enterprise environments.
+            </p>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- CORE COMPETENCIES MATRIX                   -->
+        <!-- ========================================== -->
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-3">
+                Core Competencies Matrix
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-xs">
+                
+                <div class="avoid-break">
+                    <span class="font-bold text-slate-950 font-mono">Backend &amp; Frameworks:</span>
+                    <span class="text-slate-800">
+                        
+                            C#, 
+                        
+                            ASP.NET Core, 
+                        
+                            Entity Framework Core, 
+                        
+                            Dapper, 
+                        
+                            ASP.NET MVC, 
+                        
+                            Python / Django, 
+                        
+                            RESTful Web APIs, 
+                        
+                            SOAP Web Services, 
+                        
+                            NPoco, 
+                        
+                            VB.NET
+                        
+                    </span>
+                </div>
+                
+                <div class="avoid-break">
+                    <span class="font-bold text-slate-950 font-mono">AI &amp; Integrations:</span>
+                    <span class="text-slate-800">
+                        
+                            OpenAI API &amp; LLM Agents, 
+                        
+                            Retrieval-Augmented Generation (RAG), 
+                        
+                            Vector Embeddings &amp; Knowledge Bases, 
+                        
+                            SAP RFC / SOAP Services, 
+                        
+                            Microsoft Entra ID / Azure B2C, 
+                        
+                            Adyen Payments, 
+                        
+                            SendGrid Transactional Email, 
+                        
+                            Google Maps Directions API, 
+                        
+                            PayPal API
+                        
+                    </span>
+                </div>
+                
+                <div class="avoid-break">
+                    <span class="font-bold text-slate-950 font-mono">Databases &amp; Storage:</span>
+                    <span class="text-slate-800">
+                        
+                            SQL Server / T-SQL, 
+                        
+                            Query Optimization &amp; Profiling, 
+                        
+                            PostgreSQL, 
+                        
+                            MySQL, 
+                        
+                            Sybase ASE, 
+                        
+                            Supabase (pgvector), 
+                        
+                            SQLite, 
+                        
+                            Complex Stored Procedures
+                        
+                    </span>
+                </div>
+                
+                <div class="avoid-break">
+                    <span class="font-bold text-slate-950 font-mono">Cloud &amp; DevOps:</span>
+                    <span class="text-slate-800">
+                        
+                            Microsoft Azure (App Services, Functions), 
+                        
+                            AWS (ECS, ECR, CodePipeline), 
+                        
+                            Docker &amp; Containerization, 
+                        
+                            Git &amp; GitHub Actions CI/CD, 
+                        
+                            Azure DevOps / TFS, 
+                        
+                            Windows Server &amp; IIS
+                        
+                    </span>
+                </div>
+                
+                <div class="avoid-break">
+                    <span class="font-bold text-slate-950 font-mono">Frontend &amp; UI:</span>
+                    <span class="text-slate-800">
+                        
+                            Blazor (Server &amp; WebAssembly), 
+                        
+                            HTML5 / CSS3 / Tailwind CSS, 
+                        
+                            JavaScript (ES6+) &amp; TypeScript, 
+                        
+                            React.js, 
+                        
+                            Bootstrap, 
+                        
+                            jQuery, 
+                        
+                            AngularJS
+                        
+                    </span>
+                </div>
+                
+                <div class="avoid-break">
+                    <span class="font-bold text-slate-950 font-mono">Practices &amp; Architecture:</span>
+                    <span class="text-slate-800">
+                        
+                            SOLID Principles &amp; Clean Architecture, 
+                        
+                            Microservices &amp; Cloud-Native Patterns, 
+                        
+                            Test-Driven Development (NUnit), 
+                        
+                            OWASP Top 10 Security &amp; RBAC, 
+                        
+                            High-Volume Performance Tuning, 
+                        
+                            Agile / Scrum Delivery
+                        
+                    </span>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PROFESSIONAL EXPERIENCE                    -->
+        <!-- ========================================== -->
+        <section class="mb-6">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-4">
+                Professional Experience Records
+            </h2>
+
+            <div class="space-y-5">
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">Senior Application Developer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">Visy Industries</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Melbourne, Australia (Remote / Hybrid))</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            Sep 2025 — Sep 2026
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: Major Australian packaging, recycling, and resource recovery leader operating across Australasia.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Modernized legacy reporting systems by transitioning mission-critical Crystal Reports workloads to high-throughput .NET Web APIs and Vue.js-compatible endpoints.</li>
+                        
+                        <li>Engineered deep SAP integrations using custom SOAP/XML request/response construction, RFC-style interfaces, and secure HTTP authentication protocols.</li>
+                        
+                        <li>Configured Microsoft Entra ID / Azure B2C custom user flows and Microsoft Graph API integrations for federated identity and user lookup across corporate services.</li>
+                        
+                        <li>Optimized high-volume database operations across Sybase ASE, SQL Server, and MySQL through EF Core view mapping, Dapper raw queries, and query execution plan tuning.</li>
+                        
+                        <li>Containerized microservices utilizing Docker and deployed robust pipelines to AWS ECS/ECR.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> C#, ASP.NET Core, EF Core, Dapper, SQL Server, MySQL, Sybase ASE, SAP RFC, AWS ECS/ECR, Docker
+                    </p>
+                    
+                </div>
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">Full Stack .NET Developer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">MissionLens</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Remote)</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            Oct 2025 — Feb 2026
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: AI chat agents &amp; automation solutions provider empowering non-profit and enterprise organizations.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Engineered enterprise Retrieval-Augmented Generation (RAG) pipelines leveraging OpenAI API embeddings and Supabase pgvector for compliant knowledge base Q&amp;A.</li>
+                        
+                        <li>Developed responsive, modular Blazor components and administrative interfaces for monitoring AI agent conversations and confidence metrics.</li>
+                        
+                        <li>Architected unified multi-channel conversational help desk ticketing, dispatching automated notifications via SMS, email, and live web chat.</li>
+                        
+                        <li>Enforced enterprise security policies with Role-Based Access Control (RBAC), JWT token lifecycle management, and OWASP-compliant endpoints.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> ASP.NET Web API, C#, Blazor, OpenAI API, RAG, Supabase (pgvector), AWS, Windows Server 2022, Bootstrap
+                    </p>
+                    
+                </div>
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">Full Stack .NET Developer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">Equity Transport Group (OnBoard Outsourcing)</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Melbourne, Australia / Philippines (Remote))</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            Jun 2024 — May 2025
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: Leading Australian corporate freight, logistics, and executive transportation provider.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Built customer-facing booking portals integrating Google Maps Directions &amp; Distance Matrix APIs for real-time route calculation and dynamic tiered pricing.</li>
+                        
+                        <li>Engineered an interactive Blazor Server fleet scheduling and driver job management portal used by 24/7 operations teams.</li>
+                        
+                        <li>Integrated Adyen Payment gateway supporting credit cards, digital wallets, and alternative regional payment mechanisms with webhook idempotency.</li>
+                        
+                        <li>Prototyped ChatGPT conversational dispatch workflows to streamline customer booking modifications and automated status updates.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> ASP.NET MVC, C#, EF Core, Blazor Server, Google Maps API, Adyen Payments, Azure, Entra ID, GitHub Copilot
+                    </p>
+                    
+                </div>
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">Software Engineer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">Zywave</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Remote)</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            Jan 2024 — Jun 2024
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: Premier US InsurTech SaaS provider serving over 15,000 insurance brokerages, agencies, and carriers.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Constructed SOLID C# class libraries and versioned RESTful &amp; SOAP Web Services for complex commercial policy quoting and risk rating.</li>
+                        
+                        <li>Designed and maintained bi-directional XML/JSON transformation schemas for automotive and property casualty insurance workflows.</li>
+                        
+                        <li>Collaborated in Agile sprints to eliminate performance bottlenecks in rating calculations, adhering to strict enterprise SLAs.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> C#, ASP.NET, REST APIs, SOAP, XML/JSON Schemas, Windows Server, NUnit
+                    </p>
+                    
+                </div>
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">Senior ASP.Net Developer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">EMAPTA (Springboard Research Ltd.)</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Philippines / Global Offshore)</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            Jun 2022 — Jan 2024
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: High-volume retail intelligence and IoT footfall analytics platform tracking millions of daily consumer visits.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Enhanced retail analytics dashboards with complex multi-tenant drill-down filters, improving large datatable rendering speeds by over 40%.</li>
+                        
+                        <li>Adopted Test-Driven Development (TDD) using NUnit and enforced OWASP security defenses against cross-site scripting (XSS) and injection vulnerabilities.</li>
+                        
+                        <li>Tuned SQL Server stored procedures, indexes, and NPoco/EF micro-ORM queries handling hundreds of millions of raw sensor timestamps.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> ASP.NET, Entity Framework, NPoco, NUnit, AngularJS, jQuery, NodeJS, SQL Server
+                    </p>
+                    
+                </div>
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">C# .NET Developer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">CoDev</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Cebu, Philippines)</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            Mar 2021 — Sep 2022
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: Global tech talent offshore staffing platform connecting US startups with senior engineering teams.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Engineered HRIS features across internal and external portals (internal.codev.com and customer.codev.com) serving thousands of staff.</li>
+                        
+                        <li>Spearheaded IdentityServer implementation providing centralized OAuth2/OIDC token-based Single Sign-On across all corporate applications.</li>
+                        
+                        <li>Configured SendGrid automated transactional workflows and wrote extensive automated test coverage ensuring regression-free bi-weekly releases.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> ASP.NET Core, C#, IdentityServer, React.js, Azure Cloud, SendGrid API
+                    </p>
+                    
+                </div>
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">Senior Software Developer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">iLucent Outsource Solutions</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Philippines)</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            Sep 2020 — Jan 2021
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: Specialized US healthcare business process and medical software development provider.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Delivered mission-critical medical billing and claims adjudication workflows for the MBH Healthcare Software suite.</li>
+                        
+                        <li>Led the lift-and-shift migration of on-premise Windows Server environments to Microsoft Azure and Azure Serverless Functions.</li>
+                        
+                        <li>Maintained automated build and release pipelines utilizing Azure DevOps and TFS.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> ASP.NET, C#, Azure Functions, Dynamics 365, Azure DevOps, TFS
+                    </p>
+                    
+                </div>
+                
+                <div class="avoid-break">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                        <div>
+                            <span class="font-bold text-slate-950 text-sm">Senior Software Developer</span>
+                            <span class="text-slate-700 text-sm"> | <strong class="text-indigo-800">LemonTech IT Solutions</strong></span>
+                            
+                            <span class="text-slate-500 text-xs font-mono"> (Philippines)</span>
+                            
+                        </div>
+                        <div class="text-xs font-mono font-semibold text-slate-700 flex-shrink-0">
+                            May 2020 — Aug 2020
+                        </div>
+                    </div>
+
+                    
+                    <p class="text-[11px] text-slate-600 italic mt-0.5">
+                        Domain Context: Enterprise consulting and bespoke digital transformation agency.
+                    </p>
+                    
+
+                    
+                    <ul class="mt-1.5 space-y-1 text-xs text-slate-800 list-disc list-outside ml-4 leading-relaxed">
+                        
+                        <li>Created an extensible dynamic settings CRUD metadata engine supporting runtime configuration without application restarts.</li>
+                        
+                        <li>Integrated Google Maps geospatial coordinates with interactive React.js telemetry dashboards.</li>
+                        
+                    </ul>
+                    
+
+                    
+                    <p class="text-[11px] font-mono text-slate-600 mt-1.5">
+                        <span class="font-semibold text-slate-800">Key Technologies:</span> .NET Core, C#, React.js, Microsoft SQL Server, Google Maps API, Tableau
+                    </p>
+                    
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- EARLIER EXPERIENCE HISTORY                 -->
+        <!-- ========================================== -->
+        
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-3">
+                Earlier Career History (2009 — 2020)
+            </h2>
+            <div class="space-y-2.5 text-xs text-slate-800">
+                
+                <div>
+                    <span class="font-bold text-slate-950">Software Support Engineer</span> — <span class="text-indigo-800 font-semibold">C9 Creative Digital Solutions</span>
+                    <span class="text-slate-500 font-mono">(Dec 2019 — May 2020)</span>:
+                    <span class="text-slate-700">
+                        Support &amp; feature maintenance for YouLend UK fintech portal. [Stack: ASP.NET Boilerplate, ASP.NET Zero, C#, Angular, SQL Server]
+                    </span>
+                </div>
+                
+                <div>
+                    <span class="font-bold text-slate-950">Software Engineer</span> — <span class="text-indigo-800 font-semibold">Sourcecloud Ltd</span>
+                    <span class="text-slate-500 font-mono">(Dec 2016 — Jan 2020)</span>:
+                    <span class="text-slate-700">
+                        UK cloud software consultancy behind HR4UK SaaS management platform. [Stack: C#, ASP.NET, AWS EC2/S3, SQL Server, HTML5/CSS3]
+                    </span>
+                </div>
+                
+                <div>
+                    <span class="font-bold text-slate-950">Software Engineer</span> — <span class="text-indigo-800 font-semibold">Syslogix Inc.</span>
+                    <span class="text-slate-500 font-mono">(Oct 2013 — Jul 2019)</span>:
+                    <span class="text-slate-700">
+                        Enterprise desktop, client-server, and web application solutions provider. [Stack: C#, VB.NET, ASP.NET, WinForms, SQL Server, Crystal Reports]
+                    </span>
+                </div>
+                
+                <div>
+                    <span class="font-bold text-slate-950">Web Developer</span> — <span class="text-indigo-800 font-semibold">Westkerbel LLC</span>
+                    <span class="text-slate-500 font-mono">(Jan 2012 — Dec 2013)</span>:
+                    <span class="text-slate-700">
+                        Digital media and dynamic web agency. [Stack: PHP, MySQL, JavaScript, HTML5, CSS3]
+                    </span>
+                </div>
+                
+                <div>
+                    <span class="font-bold text-slate-950">Web Developer</span> — <span class="text-indigo-800 font-semibold">Hubport Interactive Inc.</span>
+                    <span class="text-slate-500 font-mono">(Jun 2009 — Jan 2012)</span>:
+                    <span class="text-slate-700">
+                        Web and interactive media production company. [Stack: PHP, MySQL, JavaScript, jQuery, HTML/CSS, Apache]
+                    </span>
+                </div>
+                
+            </div>
+        </section>
+        
+
+        <!-- ========================================== -->
+        <!-- FEATURED ARCHITECTURAL CASE STUDIES        -->
+        <!-- ========================================== -->
+        <section class="mb-6 avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-3">
+                Key Architectural Deliverables & Case Studies
+            </h2>
+            <div class="space-y-3 text-xs">
+                
+                <div class="avoid-break bg-slate-50 p-2.5 rounded border border-slate-200">
+                    <div class="flex items-center justify-between font-bold text-slate-950">
+                        <span>AI Support Automation &amp; RAG Knowledge Engine (MissionLens)</span>
+                        <span class="font-mono text-indigo-700 font-normal text-[11px]">AI &amp; RAG</span>
+                    </div>
+                    <p class="text-slate-700 mt-1">Architected a secure Retrieval-Augmented Generation (RAG) platform that indexes proprietary policy manuals into Supabase pgvector and queries OpenAI LLMs with strict grounding prompts, preventing hallucinations and ensuring strict compliance.</p>
+                    <p class="font-mono text-[10px] text-slate-600 mt-1">
+                        <span class="font-semibold text-slate-800">Stack & Impact:</span> ASP.NET Core Web API, C#, Blazor, OpenAI API, Supabase pgvector, AWS, Docker | 99.2% Policy Accuracy | 70% Ticket Deflection Rate
+                    </p>
+                </div>
+                
+                <div class="avoid-break bg-slate-50 p-2.5 rounded border border-slate-200">
+                    <div class="flex items-center justify-between font-bold text-slate-950">
+                        <span>SAP Integration &amp; Legacy Reporting Modernization (Visy Industries)</span>
+                        <span class="font-mono text-indigo-700 font-normal text-[11px]">Enterprise Architecture</span>
+                    </div>
+                    <p class="text-slate-700 mt-1">Re-architected reporting services into modular .NET 8 Web APIs with Dapper and EF Core view mapping. Engineered resilient SOAP/XML connectors to SAP ERP with secure RFC handling and automated Microsoft Entra ID authentication.</p>
+                    <p class="font-mono text-[10px] text-slate-600 mt-1">
+                        <span class="font-semibold text-slate-800">Stack & Impact:</span> C#, ASP.NET Core, EF Core, Dapper, SQL Server, Sybase ASE, SAP RFC/SOAP, AWS ECS/ECR | 85% Query Latency Reduction | 100% Uptime Cutover
+                    </p>
+                </div>
+                
+                <div class="avoid-break bg-slate-50 p-2.5 rounded border border-slate-200">
+                    <div class="flex items-center justify-between font-bold text-slate-950">
+                        <span>Logistics Booking Engine &amp; Payment Orchestration (Equity Transport Group)</span>
+                        <span class="font-mono text-indigo-700 font-normal text-[11px]">Systems Integration</span>
+                    </div>
+                    <p class="text-slate-700 mt-1">Constructed an automated customer booking and pricing engine integrated directly with Google Maps Directions API, paired with an Adyen Payment orchestration layer ensuring PCI-DSS compliance and webhook reconciliation.</p>
+                    <p class="font-mono text-[10px] text-slate-600 mt-1">
+                        <span class="font-semibold text-slate-800">Stack & Impact:</span> ASP.NET MVC, C#, EF Core, Blazor Server, Google Maps API, Adyen API, Azure | Instant Pricing Calculations | Zero Payment Discrepancies
+                    </p>
+                </div>
+                
+                <div class="avoid-break bg-slate-50 p-2.5 rounded border border-slate-200">
+                    <div class="flex items-center justify-between font-bold text-slate-950">
+                        <span>Centralized IdentityServer SSO Portal (CoDev)</span>
+                        <span class="font-mono text-indigo-700 font-normal text-[11px]">Cloud &amp; Security</span>
+                    </div>
+                    <p class="text-slate-700 mt-1">Designed and deployed an IdentityServer-powered OAuth2/OpenID Connect central identity provider. Unified authentication for internal staff and external customer portals with secure token issuance.</p>
+                    <p class="font-mono text-[10px] text-slate-600 mt-1">
+                        <span class="font-semibold text-slate-800">Stack & Impact:</span> ASP.NET Core, C#, IdentityServer, React.js, Azure Cloud, SendGrid | 10,000+ Active Users Unified | 99.9% Authentication Reliability
+                    </p>
+                </div>
+                
+                <div class="avoid-break bg-slate-50 p-2.5 rounded border border-slate-200">
+                    <div class="flex items-center justify-between font-bold text-slate-950">
+                        <span>On-Prem to Azure Cloud Modernization (iLucent / MBH Healthcare)</span>
+                        <span class="font-mono text-indigo-700 font-normal text-[11px]">Cloud Modernization</span>
+                    </div>
+                    <p class="text-slate-700 mt-1">Migrated core medical billing workflows to Microsoft Azure App Services and Azure Functions. Refactored batch claim processing into event-driven serverless consumers with Azure DevOps CI/CD.</p>
+                    <p class="font-mono text-[10px] text-slate-600 mt-1">
+                        <span class="font-semibold text-slate-800">Stack & Impact:</span> ASP.NET, C#, Azure Functions, Azure App Services, Dynamics 365, Azure DevOps | 40% Infrastructure Cost Reduction | 99.95% Availability
+                    </p>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- EDUCATION                                  -->
+        <!-- ========================================== -->
+        <section class="avoid-break">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">
+                Education & Credentials
+            </h2>
+            <div class="flex items-center justify-between text-xs">
+                <div>
+                    <span class="font-bold text-slate-950 text-sm">Bachelor of Science in Computer Science</span>
+                    <div class="text-slate-700">STI College, Philippines</div>
+                </div>
+                <div class="font-mono font-semibold text-slate-700 text-xs">
+                    Graduated: 2009
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
