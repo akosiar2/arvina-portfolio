@@ -95,6 +95,7 @@ class HomeView(View):
             "earlier_experiences": earlier_experiences,
             "filter_tags": ordered_tags,
             "featured_projects": featured_projects,
+            "projects_payload": projects_payload,
             "all_projects_json": json.dumps(projects_payload),
             "contact_form": kwargs.get("contact_form") or ContactForm(),
             "stats": {

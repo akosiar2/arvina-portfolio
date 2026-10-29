@@ -4,33 +4,9 @@
 {% block title %}Arvin Roman Agramon | Senior Software Engineer & Enterprise Architect{% endblock %}
 
 {% block content %}
-<div x-data="{
-    // Experience timeline filter state
-    expFilter: 'All',
-    earlierExpanded: false,
+{{ projects_payload|json_script:"projects-data" }}
 
-    // Skills category tab state
-    activeSkillCategory: '{{ skill_categories.0.slug|default:'backend-frameworks' }}',
-
-    // Featured Projects modal state
-    modalOpen: false,
-    selectedProject: null,
-    allProjects: {{ all_projects_json|safe }},
-    
-    openProjectModal(projId) {
-        this.selectedProject = this.allProjects.find(p => p.id === projId) || null;
-        if (this.selectedProject) {
-            this.modalOpen = true;
-            document.body.style.overflow = 'hidden';
-            this.$nextTick(() => { if (window.lucide) window.lucide.createIcons(); });
-        }
-    },
-    closeProjectModal() {
-        this.modalOpen = false;
-        this.selectedProject = null;
-        document.body.style.overflow = '';
-    }
-}" @keydown.escape.window="closeProjectModal()">
+<div x-data="portfolioApp()" @keydown.escape.window="closeProjectModal()">
 
     <!-- ========================================================================= -->
     <!-- 1. HERO SECTION                                                          -->
@@ -889,4 +865,45 @@
     </section>
 
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+function portfolioApp() {
+    let projects = [];
+    const el = document.getElementById('projects-data');
+    if (el) {
+        try {
+            projects = JSON.parse(el.textContent);
+        } catch (e) {
+            console.error('Failed to parse projects data:', e);
+        }
+    }
+    return {
+        expFilter: 'All',
+        earlierExpanded: false,
+        activeSkillCategory: '{{ skill_categories.0.slug|default:"backend-frameworks" }}',
+        modalOpen: false,
+        selectedProject: null,
+        allProjects: projects,
+        openProjectModal(projId) {
+            this.selectedProject = this.allProjects.find(function(p) { return p.id === projId; }) || null;
+            if (this.selectedProject) {
+                this.modalOpen = true;
+                document.body.style.overflow = 'hidden';
+                this.$nextTick(function() {
+                    if (window.lucide) {
+                        window.lucide.createIcons();
+                    }
+                });
+            }
+        },
+        closeProjectModal() {
+            this.modalOpen = false;
+            this.selectedProject = null;
+            document.body.style.overflow = '';
+        }
+    };
+}
+</script>
 {% endblock %}
