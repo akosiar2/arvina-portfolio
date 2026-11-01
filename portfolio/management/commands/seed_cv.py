@@ -20,8 +20,8 @@ class Command(BaseCommand):
             "title": "Senior Software Engineer | Full-Stack & Cloud Integration Specialist",
             "summary": (
                 "Senior .NET & Full-Stack Software Engineer with extensive experience developing enterprise APIs, "
-                "database-driven applications, and system integrations. Skilled in C#, ASP.NET Core, Entity Framework Core, "
-                "Dapper, SQL Server, MySQL, Sybase ASE, with strong experience integrating SAP services and Microsoft Entra ID / "
+                "database-driven applications, and system integrations. Skilled in C#, ASP.NET Core, Javascript, Vue.js, Entity Framework Core, "
+                "Dapper, SQL Server, PostgreSQL, with strong experience integrating SAP services and Microsoft Entra ID / "
                 "Azure B2C. Experienced in modernizing legacy applications and reporting platforms, implementing AI/RAG solutions, "
                 "troubleshooting complex production issues, and delivering secure, scalable backend services across enterprise environments."
             ),
