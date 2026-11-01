@@ -123,7 +123,7 @@ class Command(BaseCommand):
                     {"name": "React.js", "proficiency_percentage": 86, "is_primary": True, "is_featured": False},
                     {"name": "Bootstrap", "proficiency_percentage": 90, "is_primary": False, "is_featured": False},
                     {"name": "jQuery", "proficiency_percentage": 92, "is_primary": False, "is_featured": False},
-                    {"name": "AngularJS", "proficiency_percentage": 85, "is_primary": False, "is_featured": False},
+                    {"name": "VueJs (Vue 3)", "proficiency_percentage": 85, "is_primary": False, "is_featured": False},
                 ],
             },
             {
