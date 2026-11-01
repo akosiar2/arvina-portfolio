@@ -182,7 +182,7 @@ class Command(BaseCommand):
                     "Optimized high-volume database operations across Sybase ASE, SQL Server, and MySQL through EF Core view mapping, Dapper raw queries, and query execution plan tuning.",
                     "Containerized microservices utilizing Docker and deployed robust pipelines to AWS ECS/ECR."
                 ],
-                "tech_stack": "C#, ASP.NET Core, EF Core, Dapper, SQL Server, MySQL, Sybase ASE, SAP RFC, AWS ECS/ECR, Docker",
+                "tech_stack": "VueJS, Typescript, C#, ASP.NET Core, EF Core, Dapper, SQL Server, MySQL, Sybase ASE, SAP RFC, AWS ECS/ECR, Docker",
                 "company_url": "https://www.visy.com.au",
             },
             {
@@ -203,7 +203,7 @@ class Command(BaseCommand):
                     "Architected unified multi-channel conversational help desk ticketing, dispatching automated notifications via SMS, email, and live web chat.",
                     "Enforced enterprise security policies with Role-Based Access Control (RBAC), JWT token lifecycle management, and OWASP-compliant endpoints."
                 ],
-                "tech_stack": "ASP.NET Web API, C#, Blazor, OpenAI API, RAG, Supabase (pgvector), AWS, Windows Server 2022, Bootstrap",
+                "tech_stack": "ASP.NET Web API, C#, Blazor, Entity Framework, OpenAI API, RAG, Supabase (pgvector), PostgreSQL, AWS, Windows Server 2022, Bootstrap",
                 "company_url": "https://missionlens.org",
             },
             {
@@ -362,7 +362,7 @@ class Command(BaseCommand):
                     "Engineered cloud document generation pipelines and reporting engines on AWS.",
                     "Maintained client payroll and employment compliance portals."
                 ],
-                "tech_stack": "C#, ASP.NET, AWS EC2/S3, SQL Server, HTML5/CSS3",
+                "tech_stack": "C#, ASP.NET, MVC, Javascript, JQuery, AWS EC2/S3, SQL Server, HTML5/CSS3",
                 "company_url": "",
             },
             {
@@ -462,7 +462,7 @@ class Command(BaseCommand):
                     "Multi-channel webhook routing for SMS (Twilio), email, and web chat.",
                     "Full audit logging and confidence scoring for regulatory compliance."
                 ],
-                "tech_stack": "ASP.NET Core Web API, C#, Blazor, OpenAI API, Supabase pgvector, AWS, Docker",
+                "tech_stack": "ASP.NET Web API, C#, Blazor, Entity Framework, OpenAI API, RAG, Supabase (pgvector), PostgreSQL, AWS, Windows Server 2022, Bootstrap",
                 "metrics": "99.2% Policy Accuracy | 70% Ticket Deflection Rate",
                 "is_featured": True,
                 "order": 1,
@@ -493,7 +493,7 @@ class Command(BaseCommand):
                     "Seamless Azure B2C SSO across all internal factory floor tools.",
                     "Containerized deployments on AWS ECS with zero downtime."
                 ],
-                "tech_stack": "C#, ASP.NET Core, EF Core, Dapper, SQL Server, Sybase ASE, SAP RFC/SOAP, AWS ECS/ECR",
+                "tech_stack": "VueJS, Typescript, C#, ASP.NET Core, EF Core, Dapper, SQL Server, MySQL, Sybase ASE, SAP RFC, AWS ECS/ECR, Docker",
                 "metrics": "85% Query Latency Reduction | 100% Uptime Cutover",
                 "is_featured": True,
                 "order": 2,
